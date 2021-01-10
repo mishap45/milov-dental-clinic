@@ -1,83 +1,66 @@
-import { StatusBar } from 'expo-status-bar'
 import React from 'react'
 import styled from 'styled-components/native'
-import { View } from 'react-native'
+import { SectionList } from 'react-native'
+import { StatusBar } from 'expo-status-bar'
+
+import Visitor from './src/components/Visitor/Visitor'
+import TitleDate from './src/components/TitleDate/TitleDate'
+import AddButton from './src/components/AddButton/AddButton'
+import visitors from './src/Data/visitors'
+
+const DATA = [
+    {
+        title: "MiLov",
+        data: visitors
+    },
+    {
+        title: "MiLov1",
+        data: visitors
+    },
+    {
+        title: "MiLov2",
+        data: visitors
+    }
+];
 
 const App = () => {
   return (
     <Container>
         <Group>
-            <GroupTitle>MiLov</GroupTitle>
-            <GroupItem>
-                <Avatar source={{ uri: 'https://re.vwp.su/pic/290719/Luna/image_2.jpg' }} />
-
-                <View style={{ flex: 1 }}>
-                    <FullName>Luna Star</FullName>
-                    <GrayText>Blow Job</GrayText>
-                </View>
-
-                <GroupDateBlock>
-                    <GroupDate>12:30</GroupDate>
-                </GroupDateBlock>
-            </GroupItem>
+            <SectionList
+                sections={DATA}
+                keyExtractor={(item, index) => item + index}
+                renderItem={({ item }) => <Visitor uri={item.uri} description={item.description} name={item.name}
+                    date={item.date} active={item.active}
+                />}
+                renderSectionHeader={({ section: { title } }) => (
+                    <TitleDate date={title} />
+                )}
+            />
         </Group>
-      <StatusBar style="auto" />
+
+        <ButtonBlock>
+            <AddButton/>
+        </ButtonBlock>
+        <StatusBar style="auto"/>
     </Container>
   );
 };
 
-const GroupDateBlock = styled.View`
-    border-radius: 18px;
-    overflow: hidden
-`;
-
-const GroupDate = styled.Text`
-    font-weight: 600;
-    color: #4294ff;
-    font-size: 14px;
-    width: 70px;
-    height: 32px;
-    text-align: center;
-    line-height: 32px;
-    background: #e9f5ff;
-`;
-
-const GrayText = styled.Text`
-    color: #8B979F;
-    font-size: 16px
-`;
-
-const FullName = styled.Text`
-    font-weight: 600;
-    font-size: 16px;
-`;
-
-const Avatar = styled.Image`
-    border-radius: 50px;
-    width: 40px;
-    height: 40px;
-    margin-right: 15px
-`;
-
-const GroupItem = styled.View`
-    padding: 20px 0;
-    flex-direction: row;
-    align-items: center
-`;
-
-const GroupTitle = styled.Text`    
-    font-weight: 800;
-    font-size: 22px;
-    color: #222
+const ButtonBlock = styled.View`
+    position: absolute;
+    bottom: 25px;
+    right: 25px
 `;
 
 const Group = styled.View`
-    padding: 0 20px
+    padding: 0 20px;
+    margin-bottom: 25px;
 `;
 
 const Container = styled.View`
     flex: 1;
-    margin-top: 50px
+    margin-top: 25px;
 `;
 
 export default App
