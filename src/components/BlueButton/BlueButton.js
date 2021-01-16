@@ -2,14 +2,14 @@ import React from 'react'
 import styled from 'styled-components/native'
 import { Foundation } from '@expo/vector-icons';
 
-const BlueButton = ({ text, flex, ml, icon, phone, bc }) => {
+const BlueButton = ({ text, ml, icon, phone, bc }) => {
 
     const BlueButtonWrapper = styled.TouchableOpacity`
     border-radius: 30px;
     background: #${bc};
     height: 45px;
-    flex: ${flex};
-    margin-left: ${ml ? '10px' : '0'}
+    margin-left: ${ml ? '10px' : '0'};   
+    flex: 1;
 `;
 
     return <BlueButtonWrapper>

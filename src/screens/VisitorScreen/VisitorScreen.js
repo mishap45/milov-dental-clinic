@@ -4,6 +4,7 @@ import styled from 'styled-components/native'
 import { GrayText } from '../../components/Visitor/Visitor'
 import BlueButton from '../../components/BlueButton/BlueButton'
 import HistoryCard from '../../components/HistoryCard/HistoryCard'
+import {View} from "react-native";
 
 const VisitorScreen = ({ route }) => {
     const { fullName, phone } = route.params;
@@ -14,8 +15,10 @@ const VisitorScreen = ({ route }) => {
             <GrayText>{phone}</GrayText>
 
             <Buttons>
-                <BlueButton text={'Формула зубів'} flex={1} bc={'2A86FF'} />
-                <BlueButton text={'P'} flex={0.15} ml icon phone bc={'84D269'} />
+                <BlueButton text={'Формула зубів'} bc={'2A86FF'} />
+                <View>
+                    <BlueButton ml icon phone bc={'84D269'} />
+                </View>
             </Buttons>
 
             <HistoryHeader>Історія відвідувань</HistoryHeader>
@@ -28,7 +31,8 @@ const HistoryHeader = styled.Text`
     font-size: 20px;
     font-weight: 600;
     line-height: 30px;
-    margin-top: 40px
+    margin-top: 40px;
+    margin-bottom: 25px
 `;
 
 const Buttons = styled.View`
