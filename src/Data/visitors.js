@@ -7,7 +7,8 @@ const visitors = [
         name: 'Luna Star',
         description: 'Blow Job',
         date: '12:30',
-        active: true
+        active: true,
+        phone: '+38 (066) 349-24-54'
     },
     {
         id: 2,
@@ -15,7 +16,8 @@ const visitors = [
         name: 'Madison Ivy',
         description: 'Pin on Madison Ivy',
         date: '13:30',
-        active: false
+        active: false,
+        phone: '+38 (066) 641-16-09'
     },
     {
         id: 3,
@@ -23,7 +25,8 @@ const visitors = [
         name: 'Aleta Ocean',
         description: 'See and Save As aletta ocean',
         date: '15:30',
-        active: false
+        active: false,
+        phone: '+38 (012) 345-67-89'
     },
 ];
 

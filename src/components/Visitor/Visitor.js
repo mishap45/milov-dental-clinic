@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components/native'
 import { View } from 'react-native'
 
-const Visitor = ({ uri, name, description, date, active }) => {
+const Visitor = ({ uri, name, description, date, active, navigation, phone }) => {
 
     const GroupDate = styled.Text`
     font-weight: 600;
@@ -15,8 +15,11 @@ const Visitor = ({ uri, name, description, date, active }) => {
     background: ${active ? '#2A86FF' : '#e9f5ff'};
 `;
 
+    const onVisitorScreen = () => navigation.navigate('VisitorScreen',
+        { fullName: name, phone: phone });
+
     return (
-        <GroupItem>
+        <GroupItem onPress={onVisitorScreen}>
             <Avatar source={{ uri: uri }} />
 
             <View style={{ flex: 1 }}>
@@ -36,7 +39,7 @@ const GroupDateBlock = styled.View`
     overflow: hidden
 `;
 
-const GrayText = styled.Text`
+export const GrayText = styled.Text`
     color: #8B979F;
     font-size: 16px
 `;

@@ -3,7 +3,16 @@ import styled from 'styled-components/native'
 
 const AddButton = () => {
     return (
-        <AddButtonBlock>
+        <AddButtonBlock style={{
+            shadowColor: '#2A86FF',
+            shadowOffset: {
+                width: 0,
+                height: 2,
+            },
+            shadowOpacity: 0.7,
+            shadowRadius: 3.5,
+            elevation: 5
+        }}>
             <AddButtonText>+</AddButtonText>
         </AddButtonBlock>
     )
@@ -14,14 +23,6 @@ const AddButtonBlock = styled.TouchableOpacity`
     height: 64px
     border-radius: 50px;
     background: #2A86FF;
-    shadow-color: #2A86FF;
-    shadow-offset: {
-        width: 0,
-        height: 2,
-    };
-    shadow-opacity: 0.7;
-    shadow-radius: 3.5;
-    elevation: 5;
 `;
 
 const AddButtonText = styled.Text`

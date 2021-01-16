@@ -9,7 +9,7 @@ const GroupTitle = styled.Text`
     color: #222;
     padding-top: 25px;
     padding-bottom: 15px;
-    background-color: #fff
+    background-color: #f1f1f1
 `;
 
 export default TitleDate
