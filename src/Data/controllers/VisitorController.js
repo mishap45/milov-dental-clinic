@@ -1,4 +1,5 @@
 const { Visitor } = require('../models');
+const { validationResult } = require('express-validator');
 
 function VisitorController() {}
 
@@ -8,6 +9,14 @@ const create = async function(req, res) {
         fullName: req.body.fullName,
         phone: req.body.phone
     };
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({
+            success: false,
+            message: errors.array()
+        });
+    }
 
     await Visitor.create(data, function (err, docs) {
         if(err){
