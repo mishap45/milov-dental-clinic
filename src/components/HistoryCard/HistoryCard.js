@@ -2,11 +2,13 @@ import React from 'react'
 import styled from 'styled-components/native'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { Ionicons } from '@expo/vector-icons'
+import { MaterialIcons } from '@expo/vector-icons'
 import { Text } from 'react-native'
 
 const HistoryCard = () => {
     return (
         <HistoryBlock>
+            <MoreButton><MaterialIcons name="more-vert" size={24} color="#A3A3A3" /></MoreButton>
             <HistoryCardRow>
                 <Ionicons name="md-medical" size={16} color="#A3A3A3" />
                 <HistoryCardLabel>Зуб: <Text style={{ fontWeight: '600' }}>12</Text></HistoryCardLabel>
@@ -29,6 +31,12 @@ const HistoryCard = () => {
         </HistoryBlock>
     )
 };
+
+const MoreButton = styled.TouchableOpacity`
+    position: absolute;
+    top: 15px;
+    right: 15px
+`;
 
 const HistoryCardRow = styled.View`
     flex-direction: row;
