@@ -1,4 +1,4 @@
-const { Visit } = require('../models');
+const { Visit, Visitor } = require('../models');
 const { validationResult } = require('express-validator');
 
 function VisitController() {}
@@ -19,6 +19,15 @@ const create = async function(req, res) {
         return res.status(422).json({
             success: false,
             message: errors.array()
+        });
+    }
+
+    const visitor = await Visitor.findOne({ _id:  data.visitor });
+
+    if(!visitor) {
+        return res.status(404).json({
+            success: false,
+            message: 'VISITOR_NOT_FOUND'
         });
     }
 
@@ -53,9 +62,36 @@ const all = function (req, res) {
     })
 };
 
+const remove = async function(req, res) {
+  const id = req.params.id;
+
+  const visit = await Visit.findOne({ _id:  id });
+
+  if(!visit) {
+      return res.status(404).json({
+          success: false,
+          message: 'VISIT_NOT_FOUND'
+      });
+  }
+
+  Visitor.deleteOne({ _id: id }, (err) => {
+      if(err){
+          return res.status(500).json({
+              success: false,
+              message: err
+          })
+      }
+
+      res.json({
+          success: true
+      })
+  })
+};
+
 VisitController.prototype = {
     all,
-    create
+    create,
+    remove
 };
 
 module.exports = VisitController;

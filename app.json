@@ -4,7 +4,7 @@
   "expo": {
     "name": "milov-dental-clinic",
     "slug": "milov-dental-clinic",
-    "version": "1.0.0",
+    "version": "0.0.0",
     "assetBundlePatterns": [
       "**/*"
     ]

@@ -14,6 +14,7 @@ app.post('/visitors', validation.visitor.create, VisitorCtrl.create);
 
 app.get('/visit', VisitCtrl.all);
 app.post('/visit', validation.visit.create, VisitCtrl.create);
+app.delete('/visit/ :id', VisitCtrl.remove);
 
 app.listen(6666, function (err) {
     if(err) {

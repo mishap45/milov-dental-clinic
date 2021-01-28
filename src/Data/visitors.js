@@ -3,27 +3,27 @@ import React from 'react'
 const visitors = [
     {
         id: 1,
-        uri: 'https://re.vwp.su/pic/290719/Luna/image_2.jpg',
-        name: 'Luna Star',
-        description: 'Blow Job',
+        uri: 'https://media.wired.com/photos/593261cab8eb31692072f129/master/pass/85120553.jpg',
+        name: 'Cutest Cutest',
+        description: 'Live',
         date: '12:30',
         active: true,
         phone: '+38 (066) 349-24-54'
     },
     {
         id: 2,
-        uri: 'https://i.pinimg.com/originals/63/77/cf/6377cf61bde13f33b26e009f5835dccd.jpg',
-        name: 'Madison Ivy',
-        description: 'Pin on Madison Ivy',
+        uri: 'http://animalia.bio/uploads/animals/photos/full/1.25x1/XDCO5hVP1ssUOwcEV6Y4.jpg',
+        name: 'SCIENTIFIC CLASSIFICATION',
+        description: 'KINGDOM Animalia',
         date: '13:30',
         active: false,
         phone: '+38 (066) 641-16-09'
     },
     {
         id: 3,
-        uri: 'https://thumb-p6.xhcdn.com/a/Vw0nL6I5MobmJzRmtToPYQ/000/425/959/636_1000.jpg',
-        name: 'Aleta Ocean',
-        description: 'See and Save As aletta ocean',
+        uri: 'https://i.pinimg.com/originals/a9/58/e0/a958e05f3507201e6972063c4c7bfd01.jpg',
+        name: 'kit fox',
+        description: 'Desert',
         date: '15:30',
         active: false,
         phone: '+38 (012) 345-67-89'
