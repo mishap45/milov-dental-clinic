@@ -49,9 +49,94 @@ const all = function (req, res) {
     })
 };
 
+const remove = async function(req, res) {
+    const id = req.params.id;
+
+    try {
+        await Visitor.findOne({ _id:  id });
+    } catch (e) {
+        return res.status(404).json({
+            success: false,
+            message: 'VISITOR_NOT_FOUND'
+        });
+    }
+
+    Visitor.deleteOne({ _id: id }, (err) => {
+        if(err){
+            return res.status(500).json({
+                success: false,
+                message: err
+            })
+        }
+
+        res.json({
+            success: true
+        })
+    })
+};
+
+const update = async function(req, res) {
+    const visitorId = req.params.id;
+
+    const data = {
+        fullName: req.body.fullName,
+        phone: req.body.phone
+    };
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({
+            success: false,
+            message: errors.array()
+        });
+    }
+
+    try {
+        await Visitor.findOne({ _id:  visitorId });
+    } catch (e) {
+        return res.status(404).json({
+            success: false,
+            message: 'VISITOR_NOT_FOUND'
+        });
+    }
+
+    await Visitor.updateOne({ _id:  visitorId }, { $set: data }, function (err) {
+        if(err){
+            return res.status(500).json({
+                success: false,
+                message: err
+            })
+        }
+
+        res.json({
+            success: true
+        })
+    })
+};
+
+const show = async function(req, res) {
+    const id = req.params.id;
+
+    try {
+        const visitor = await Visitor.findById(id).populate('visits').exec();
+        res.json({
+            success: true,
+            data: { ...visitor._doc, visits: visitor.visits }
+        })
+    } catch (e) {
+        return res.status(404).json({
+            success: false,
+            message: 'VISITOR_NOT_FOUND'
+        });
+    }
+};
+
 VisitorController.prototype = {
     all,
-    create
+    create,
+    remove,
+    update,
+    show
 };
 
 module.exports = VisitorController;
