@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components/native'
 
-import { GrayText } from '../../components/Visitor/Visitor'
-import BlueButton from '../../components/BlueButton/BlueButton'
-import HistoryCard from '../../components/HistoryCard/HistoryCard'
+import { GrayText } from '../components/Visitor/Visitor'
+import BlueButton from '../components/BlueButton/BlueButton'
+import HistoryCard from '../components/HistoryCard/HistoryCard'
 import {View} from "react-native";
 
 const VisitorScreen = ({ route }) => {

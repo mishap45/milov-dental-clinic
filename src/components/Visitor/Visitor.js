@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components/native'
 import { View } from 'react-native'
 
-const Visitor = ({ uri, name, description, date, active, navigation, phone }) => {
+const Visitor = ({ name, description, date, active, navigation, phone }) => {
 
     const GroupDate = styled.Text`
     font-weight: 600;
@@ -20,7 +20,7 @@ const Visitor = ({ uri, name, description, date, active, navigation, phone }) =>
 
     return (
         <GroupItem onPress={onVisitorScreen}>
-            <Avatar source={{ uri: uri }} />
+            <Avatar source={require('../../assets/teeth.png')} />
 
             <View style={{ flex: 1 }}>
                 <FullName>{ name }</FullName>

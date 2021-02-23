@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components/native'
-import { Foundation } from '@expo/vector-icons';
+import { Foundation } from '@expo/vector-icons'
 
-const BlueButton = ({ text, ml, icon, phone, bc }) => {
+const BlueButton = ({ text, ml, icon, phone, bc, onPress }) => {
 
     const BlueButtonWrapper = styled.TouchableOpacity`
     border-radius: 30px;
@@ -12,7 +12,7 @@ const BlueButton = ({ text, ml, icon, phone, bc }) => {
     flex: 1;
 `;
 
-    return <BlueButtonWrapper>
+    return <BlueButtonWrapper onPress={onPress}>
         <ButtonText>{
             icon
                 ? phone && <Foundation name="telephone" size={22} color="white" />

@@ -2,6 +2,7 @@ const { Visit, Visitor } = require('../models');
 const { validationResult } = require('express-validator');
 const { delayedSMS } = require('../utils');
 const dayjs = require('dayjs');
+const { groupBy, reduce } = require('lodash');
 
 function VisitController() {}
 
@@ -69,9 +70,14 @@ const all = function (req, res) {
             })
         }
 
+        const group = groupBy(docs, 'date');
+
         res.json({
             success: true,
-            data: docs
+            data: reduce(group, (result, value, key) => {
+                result = [...result, {title: key, data: value}];
+                return result
+            }, [])
         })
     })
 };

@@ -1,8 +1,9 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import VisitorsListScreen from '../VisitorsListScreen/VisitorsListScreen'
-import VisitorScreen from '../VisitorScreen/VisitorScreen'
+import VisitorsListScreen from '../VisitorsListScreen'
+import VisitorScreen from '../VisitorScreen'
+import AddVisitorScreen from '../AddVisitorScreen'
 import HeaderText from '../../components/HeaderText/HeaderText'
 
 const Stack = createStackNavigator();
@@ -23,7 +24,7 @@ const AppNavigation = () => {
                 name="VisitorsListScreen"
                 component={VisitorsListScreen}
                 options={{
-                    headerTitle: () => <HeaderText text='Пацієнти' />,
+                    headerTitle: () => <HeaderText text='Відвідування' />,
                     headerTitleAlign: 'left',
                 }}
             />
@@ -33,6 +34,15 @@ const AppNavigation = () => {
                 component={VisitorScreen}
                 options={{
                     headerTitle: () => <HeaderText text='Картка пацієнта' />,
+                    headerBackTitle: 'Назад'
+                }}
+            />
+
+            <Stack.Screen
+                name="AddVisitorScreen"
+                component={AddVisitorScreen}
+                options={{
+                    headerTitle: () => <HeaderText text='Додати пацієнта' />,
                     headerBackTitle: 'Назад'
                 }}
             />

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/native'
 
-const AddButton = () => {
+const AddButton = ({ AddScreen }) => {
     return (
         <AddButtonBlock style={{
             shadowColor: '#2A86FF',
@@ -12,7 +12,7 @@ const AddButton = () => {
             shadowOpacity: 0.7,
             shadowRadius: 3.5,
             elevation: 5
-        }}>
+        }} onPress={AddScreen}>
             <AddButtonText>+</AddButtonText>
         </AddButtonBlock>
     )
