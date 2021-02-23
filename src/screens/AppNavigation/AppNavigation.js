@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import VisitorsListScreen from '../VisitorsListScreen'
 import VisitorScreen from '../VisitorScreen'
 import AddVisitorScreen from '../AddVisitorScreen'
+import AddVisitScreen from '../AddVisitScreen'
 import HeaderText from '../../components/HeaderText/HeaderText'
 
 const Stack = createStackNavigator();
@@ -43,6 +44,15 @@ const AppNavigation = () => {
                 component={AddVisitorScreen}
                 options={{
                     headerTitle: () => <HeaderText text='Додати пацієнта' />,
+                    headerBackTitle: 'Назад'
+                }}
+            />
+
+            <Stack.Screen
+                name="AddVisitScreen"
+                component={AddVisitScreen}
+                options={{
+                    headerTitle: () => <HeaderText text='Додати візит' />,
                     headerBackTitle: 'Назад'
                 }}
             />

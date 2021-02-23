@@ -5,27 +5,27 @@ import { Ionicons } from '@expo/vector-icons'
 import { MaterialIcons } from '@expo/vector-icons'
 import { Text } from 'react-native'
 
-const HistoryCard = () => {
+const HistoryCard = ({ dentNumber, diagnosis, date, time, price }) => {
     return (
         <HistoryBlock>
             <MoreButton><MaterialIcons name="more-vert" size={24} color="#A3A3A3" /></MoreButton>
             <HistoryCardRow>
                 <Ionicons name="md-medical" size={16} color="#A3A3A3" />
-                <HistoryCardLabel>Зуб: <Text style={{ fontWeight: '600' }}>12</Text></HistoryCardLabel>
+                <HistoryCardLabel>Зуб: <Text style={{ fontWeight: '600' }}>{dentNumber}</Text></HistoryCardLabel>
             </HistoryCardRow>
 
             <HistoryCardRow>
                 <FontAwesome5 name="clipboard-list" size={16} color="#A3A3A3" />
-                <HistoryCardLabel>Діагноз: <Text style={{ fontWeight: '600' }}>fucking</Text></HistoryCardLabel>
+                <HistoryCardLabel>Діагноз: <Text style={{ fontWeight: '600' }}>{diagnosis}</Text></HistoryCardLabel>
             </HistoryCardRow>
 
             <HistoryCardRow style={{ justifyContent: 'space-between', marginTop: 15 }}>
                 <GroupDateBlock>
-                    <GroupDate>11.10.2020 - 15:30</GroupDate>
+                    <GroupDate>{date} - {time}</GroupDate>
                 </GroupDateBlock>
 
                 <GroupDateBlock>
-                    <GreenGroupDate>100$</GreenGroupDate>
+                    <GreenGroupDate>{price}$</GreenGroupDate>
                 </GroupDateBlock>
             </HistoryCardRow>
         </HistoryBlock>
@@ -41,7 +41,7 @@ const MoreButton = styled.TouchableOpacity`
 const HistoryCardRow = styled.View`
     flex-direction: row;
     align-items: center;
-    margin-top: 3.5px
+    margin-top: 3.5px;
     margin-bottom: 3.5px
 `;
 
@@ -57,7 +57,8 @@ const HistoryBlock = styled.View`
     shadow-radius: 10px;
     padding: 20px 25px;
     border-radius: 10px;
-    background: #f1f1f1 
+    background: #f1f1f1;
+    margin-bottom: 8px
 `;
 
 const GroupDate = styled.Text`

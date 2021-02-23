@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components/native'
 import { View } from 'react-native'
 
-const Visitor = ({ name, description, date, active, navigation, phone }) => {
+const Visitor = ({ name, description, date, active, navigation, phone, id }) => {
 
     const GroupDate = styled.Text`
     font-weight: 600;
@@ -16,7 +16,7 @@ const Visitor = ({ name, description, date, active, navigation, phone }) => {
 `;
 
     const onVisitorScreen = () => navigation.navigate('VisitorScreen',
-        { fullName: name, phone: phone });
+        { fullName: name, phone: phone, id: id });
 
     return (
         <GroupItem onPress={onVisitorScreen}>
