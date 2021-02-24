@@ -47,7 +47,8 @@ const VisitorScreen = ({ route, navigation }) => {
             />
 
             <ButtonBlock>
-                <AddButton AddScreen={() => navigation.navigate('AddVisitScreen')} />
+                <AddButton AddScreen={() => navigation.navigate('AddVisitScreen',
+                    { id: id })} />
             </ButtonBlock>
         </ContainerVisitor>
     )

@@ -22,8 +22,7 @@ const AddVisitorScreen = ({ navigation }) => {
                         Add(values);
 
                         values.fullName = '';
-                        values.phone = '';
-                        return navigation.navigate('VisitorsListScreen')
+                        values.phone = ''
                     }}
                 >
                     {({ handleChange, handleBlur, handleSubmit, values }) => (

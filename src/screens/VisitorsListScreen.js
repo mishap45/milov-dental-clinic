@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/native'
-import { SectionList, ActivityIndicator, Alert } from 'react-native'
+import { SectionList, ActivityIndicator, Alert, RefreshControl } from 'react-native'
 import Swipeable from 'react-native-swipeable-row'
 import { Feather } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons'
@@ -70,6 +70,12 @@ const VisitorsListScreen = ({ navigation }) => {
                                  phone={item.visitor.phone} id={item.visitor._id}
                         />
                     </Swipeable>}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={isLoading}
+                            onRefresh={getVisit}
+                        />
+                    }
                     renderSectionHeader={({ section: { title } }) => (
                         <TitleDate date={title} />
                     )}

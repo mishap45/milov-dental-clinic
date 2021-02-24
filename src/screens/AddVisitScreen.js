@@ -1,14 +1,16 @@
 import React from 'react'
 import { Container, Content, Form, Item, Input, Label } from 'native-base'
 import { Formik } from 'formik'
+import { View } from 'react-native'
 
 import BlueButton from '../components/BlueButton/BlueButton'
-import { visitorsApi } from '../api'
+import { visitApi } from '../api'
 
-const AddVisitScreen = ({ navigation }) => {
+const AddVisitScreen = ({ navigation, route }) => {
+    const { id } = route.params;
 
     const Add = (values) => {
-        visitorsApi.add(values).then(() => {
+        visitApi.add(values).then(() => {
           return navigation.navigate('VisitorsListScreen')
       })
     };
@@ -17,32 +19,58 @@ const AddVisitScreen = ({ navigation }) => {
         <Container>
             <Content style={{ padding: 12 }}>
                 <Formik
-                    initialValues={{ fullName: '', phone: '' }}
+                    initialValues={{ dentNumber: '', diagnosis: '', price: '', date: '', time: '', visitor: '' }}
                     onSubmit={values => {
+                        values.visitor = id;
                         Add(values);
 
-                        values.fullName = '';
-                        values.phone = '';
-                        return navigation.navigate('VisitorsListScreen')
+                        values.dentNumber = '';
+                        values.diagnosis = '';
+                        values.price = '';
+                        values.date = '';
+                        values.time = ''
                     }}
                 >
                     {({ handleChange, handleBlur, handleSubmit, values }) => (
                         <>
                             <Item floatingLabel style={{marginRight: 12, marginLeft: 12, marginTop: 12, marginBottom: 12}}>
-                                <Label>Ім'я</Label>
-                                <Input onChangeText={handleChange('fullName')}
-                                       onBlur={handleBlur('fullName')}
-                                       value={values.fullName} style={{marginTop: 12}}/>
+                                <Label>Номер зуба</Label>
+                                <Input keyboardType='numeric' onChangeText={handleChange('dentNumber')}
+                                       onBlur={handleBlur('dentNumber')}
+                                       value={values.dentNumber} style={{marginTop: 12}}/>
                             </Item>
 
                             <Item floatingLabel style={{marginBottom: 50, marginRight: 12, marginLeft: 12}}>
-                                <Label>Телефон</Label>
-                                <Input keyboardType='numeric' onChangeText={handleChange('phone')}
-                                       onBlur={handleBlur('phone')}
-                                       value={values.phone} style={{marginTop: 12}}/>
+                                <Label>Діагноз</Label>
+                                <Input onChangeText={handleChange('diagnosis')}
+                                       onBlur={handleBlur('diagnosis')}
+                                       value={values.diagnosis} style={{marginTop: 12}}/>
                             </Item>
 
-                            <BlueButton text={'Добавити пацієнта'} bc={'84D269'} onPress={handleSubmit}/>
+                            <Item floatingLabel style={{marginBottom: 50, marginRight: 12, marginLeft: 12}}>
+                                <Label>Ціна</Label>
+                                <Input keyboardType='numeric' onChangeText={handleChange('price')}
+                                       onBlur={handleBlur('price')}
+                                       value={values.price} style={{marginTop: 12}}/>
+                            </Item>
+
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                <Item floatingLabel style={{marginBottom: 50, marginRight: 12, marginLeft: 12, width: '40%'}}>
+                                    <Label>Дата</Label>
+                                    <Input onChangeText={handleChange('date')}
+                                           onBlur={handleBlur('date')}
+                                           value={values.date} style={{marginTop: 12}}/>
+                                </Item>
+
+                                <Item floatingLabel style={{marginBottom: 50, marginRight: 12, marginLeft: 12, width: '40%'}}>
+                                    <Label>Година</Label>
+                                    <Input onChangeText={handleChange('time')}
+                                           onBlur={handleBlur('time')}
+                                           value={values.time} style={{marginTop: 12}}/>
+                                </Item>
+                            </View>
+
+                            <BlueButton text={'Добавити візит'} bc={'84D269'} onPress={handleSubmit}/>
                         </>
                     )}
                 </Formik>
