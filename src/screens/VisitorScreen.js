@@ -26,7 +26,7 @@ const VisitorScreen = ({ route, navigation }) => {
             <GrayText>{phone}</GrayText>
 
             <Buttons>
-                <BlueButton text={'Формула зубів'} bc={'2A86FF'} />
+                <BlueButton text={'Формула зубів'} bc={'2A86FF'} disable />
                 <View>
                     <BlueButton ml icon phone bc={'84D269'} onPress={() => Linking.openURL(`tel:${phone}`)} />
                 </View>

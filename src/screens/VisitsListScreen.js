@@ -1,34 +1,35 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/native'
-import { FlatList, ActivityIndicator, Alert, RefreshControl, Text } from 'react-native'
+import { SectionList, ActivityIndicator, Alert, RefreshControl, Text } from 'react-native'
 import Swipeable from 'react-native-swipeable-row'
 import { Feather } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons'
 
-import AddButton from '../components/AddButton/AddButton'
-import { visitorsApi } from '../api'
 import Visitor from '../components/Visitor/Visitor'
+import TitleDate from '../components/TitleDate/TitleDate'
+import AddButton from '../components/AddButton/AddButton'
+import { visitApi } from '../api'
 
 const VisitsListScreen = ({ navigation }) => {
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    const getVisitors = () => {
+    const getVisit = () => {
         setIsLoading(true);
-        visitorsApi.get().then(({ data }) => {
+        visitApi.get().then(({ data }) => {
             setData(data.data);
             setIsLoading(false)
         })
     };
 
     useEffect(() => {
-        getVisitors()
+        getVisit()
     }, []);
 
-    const removeVisitor = (id) => {
+    const removeVisit = (id) => {
         Alert.alert(
-            'Видалити пацієнта',
-            'Ви дійсно хочете видалити пацієнта?',
+            'Видалити візит',
+            'Ви дійсно хочете видалити візит?',
             [
                 {
                     text: 'Ні',
@@ -38,9 +39,12 @@ const VisitsListScreen = ({ navigation }) => {
                     text: 'Видалити',
                     onPress: () => {
                         setIsLoading(true);
-                        const result = data.filter(item => item._id !== id);
+                        const result = data.map(g => {
+                            g.data = g.data.filter(item => item._id !== id);
+                            return g
+                        });
                         setData(result);
-                        visitorsApi.remove(id).then(() => getVisitors())
+                        visitApi.remove(id).then(() => getVisit())
                     }
                 }
             ]
@@ -50,45 +54,51 @@ const VisitsListScreen = ({ navigation }) => {
     return (
         <Container>
             <TextScreenParamsView>
-                <TextScreenParams onPress={() => navigation.navigate('VisitsListScreen')}>
-                    <Text style={{ color: '#2A86FF' }}>Відвідування</Text>
-                </TextScreenParams>
-
                 <TextScreenParamsActive>
-                    <Text style={{ color: '#fff' }}>Пацієнти</Text>
+                    <Text style={{ color: '#fff' }}>Відвідування</Text>
                 </TextScreenParamsActive>
+
+                <TextScreenParams onPress={() => navigation.navigate('VisitorsListScreen')}>
+                    <Text style={{ color: '#2A86FF' }}>Пацієнти</Text>
+                </TextScreenParams>
             </TextScreenParamsView>
             <Group>
                 {isLoading
                     ? <ActivityIndicator size={'large'} color={'#2A86FF'} />
-                    : data && <FlatList
-                    data={data}
+                    : data && <SectionList
+                    sections={data}
                     keyExtractor={(item) => item._id}
                     renderItem={({item}) => <Swipeable rightButtons={[
-                        <SwipeViewButtonGray onPress={() => navigation.navigate('EditVisitorScreen',
+                        <SwipeViewButtonGray onPress={() => navigation.navigate('EditVisitScreen',
                             {
                                 id: item._id,
-                                fullName: item.fullName,
-                                phone: item.phone
+                                dentNumber: item.dentNumber,
+                                diagnosis: item.diagnosis,
+                                price: item.price,
+                                date: item.date,
+                                time: item.time
                             })}>
                             <Feather name="edit-2" size={32} color="white" />
                         </SwipeViewButtonGray>,
 
-                        <SwipeViewButton onPress={() => removeVisitor(item._id)}>
+                        <SwipeViewButton onPress={() => removeVisit(item._id)}>
                             <AntDesign name="close" size={32} color="white" />
                         </SwipeViewButton>
                     ]}>
-                        <Visitor description={item.phone} name={item.fullName}
-                                 navigation={navigation}
-                                 phone={item.phone} id={item._id}
+                        <Visitor description={item.diagnosis} name={item.visitor.fullName}
+                                 date={item.time} active={item.active} navigation={navigation}
+                                 phone={item.visitor.phone} id={item.visitor._id}
                         />
                     </Swipeable>}
                     refreshControl={
                         <RefreshControl
                             refreshing={isLoading}
-                            onRefresh={getVisitors}
+                            onRefresh={getVisit}
                         />
                     }
+                    renderSectionHeader={({ section: { title } }) => (
+                        <TitleDate date={title} />
+                    )}
                 />}
             </Group>
 
@@ -120,7 +130,8 @@ const TextScreenParamsActive = styled.TouchableOpacity`
 
 const TextScreenParamsView = styled.View`
     flex-direction: row;
-    justify-content: center
+    justify-content: center;
+    margin-bottom: 10px
 `;
 
 const SwipeViewButton = styled.TouchableOpacity`

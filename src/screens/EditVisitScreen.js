@@ -7,10 +7,10 @@ import BlueButton from '../components/BlueButton/BlueButton'
 import { visitApi } from '../api'
 
 const AddVisitScreen = ({ navigation, route }) => {
-    const { id } = route.params;
+    const { id, dentNumber, diagnosis, price, date, time } = route.params;
 
-    const Add = (values) => {
-        visitApi.add(values).then(() => {
+    const Edit = (values) => {
+        visitApi.patch(id, values).then(() => {
           return navigation.navigate('VisitsListScreen')
       })
     };
@@ -19,10 +19,10 @@ const AddVisitScreen = ({ navigation, route }) => {
         <Container>
             <Content style={{ padding: 12 }}>
                 <Formik
-                    initialValues={{ dentNumber: '', diagnosis: '', price: '', date: '', time: '', visitor: '' }}
+                    initialValues={{ dentNumber: dentNumber, diagnosis: diagnosis, price: price, date: date, time: time, visitor: '' }}
                     onSubmit={values => {
                         values.visitor = id;
-                        Add(values);
+                        Edit(values);
 
                         values.dentNumber = '';
                         values.diagnosis = '';
@@ -37,7 +37,7 @@ const AddVisitScreen = ({ navigation, route }) => {
                                 <Label>Номер зуба</Label>
                                 <Input keyboardType='numeric' onChangeText={handleChange('dentNumber')}
                                        onBlur={handleBlur('dentNumber')}
-                                       value={values.dentNumber} style={{marginTop: 12}}/>
+                                       value={values.dentNumber.toString()} style={{marginTop: 12}}/>
                             </Item>
 
                             <Item floatingLabel style={{marginBottom: 50, marginRight: 12, marginLeft: 12}}>
@@ -51,7 +51,7 @@ const AddVisitScreen = ({ navigation, route }) => {
                                 <Label>Ціна</Label>
                                 <Input keyboardType='numeric' onChangeText={handleChange('price')}
                                        onBlur={handleBlur('price')}
-                                       value={values.price} style={{marginTop: 12}}/>
+                                       value={values.price.toString()} style={{marginTop: 12}}/>
                             </Item>
 
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -70,7 +70,7 @@ const AddVisitScreen = ({ navigation, route }) => {
                                 </Item>
                             </View>
 
-                            <BlueButton text={'Добавити візит'} bc={'84D269'} onPress={handleSubmit}/>
+                            <BlueButton text={'Редагувати візит'} bc={'84D269'} onPress={handleSubmit}/>
                         </View>
                     )}
                 </Formik>

@@ -8,7 +8,7 @@ import { Text } from 'react-native'
 const HistoryCard = ({ dentNumber, diagnosis, date, time, price }) => {
     return (
         <HistoryBlock>
-            <MoreButton><MaterialIcons name="more-vert" size={24} color="#A3A3A3" /></MoreButton>
+            <MoreButton disbled={true}><MaterialIcons name="more-vert" size={24} color="#A3A3A3" /></MoreButton>
             <HistoryCardRow>
                 <Ionicons name="md-medical" size={16} color="#A3A3A3" />
                 <HistoryCardLabel>Зуб: <Text style={{ fontWeight: '600' }}>{dentNumber}</Text></HistoryCardLabel>
@@ -35,7 +35,8 @@ const HistoryCard = ({ dentNumber, diagnosis, date, time, price }) => {
 const MoreButton = styled.TouchableOpacity`
     position: absolute;
     top: 15px;
-    right: 15px
+    right: 15px;
+    opacity: .2
 `;
 
 const HistoryCardRow = styled.View`

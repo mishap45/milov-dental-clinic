@@ -5,10 +5,11 @@ import { Formik } from 'formik'
 import BlueButton from '../components/BlueButton/BlueButton'
 import { visitorsApi } from '../api'
 
-const AddVisitorScreen = ({ navigation }) => {
+const AddVisitorScreen = ({ navigation, route }) => {
+    const { id, fullName, phone } = route.params;
 
-    const Add = (values) => {
-        visitorsApi.add(values).then(() => {
+    const Edit = (values) => {
+        visitorsApi.patch(id, values).then(() => {
           return navigation.navigate('VisitsListScreen')
       })
     };
@@ -17,9 +18,9 @@ const AddVisitorScreen = ({ navigation }) => {
         <Container>
             <Content style={{ padding: 12 }}>
                 <Formik
-                    initialValues={{ fullName: '', phone: '' }}
+                    initialValues={{ fullName: fullName, phone: phone }}
                     onSubmit={values => {
-                        Add(values);
+                        Edit(values);
 
                         values.fullName = '';
                         values.phone = ''
@@ -41,7 +42,7 @@ const AddVisitorScreen = ({ navigation }) => {
                                        value={values.phone} style={{marginTop: 12}}/>
                             </Item>
 
-                            <BlueButton text={'Добавити пацієнта'} bc={'84D269'} onPress={handleSubmit}/>
+                            <BlueButton text={'Редагувати пацієнта'} bc={'84D269'} onPress={handleSubmit}/>
                         </>
                     )}
                 </Formik>
